@@ -1,5 +1,6 @@
 * {
-    border: 2px solid red;
+    font-family: 'Quicksand', sans-serif;
+    // border: 1px solid red;
 }
 html, body {
     margin: 0;
@@ -7,10 +8,118 @@ html, body {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    text-align: center;
+    background-color: #E9DAC1;
+}
+.main {
+    background-color: #F7ECDE;
+    border-radius: 40px;
+    box-shadow: 1px 1px #dabd96;
+    padding: 20px;
+    width: 90%;
+    height: 80%;
+    margin: 10px 40px 5px 40px;
+}
+h1 {
+    font-family: 'Pacifico', cursive;
+    margin-top: 0;
+}
+.content {
+    display: flex;
+    justify-content: center;
+    gap: 5em;
+
+    .settings {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 15vw;
+    }
+    .grid-resize {
+
+        margin-bottom: 5px;
+    
+        label {
+            display: block;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5em;
+
+        button {
+            cursor: pointer;
+            //TODO add more shadow unclicked and no shadow when clicked
+            background-color: #9ED2C6;
+            border: 2px solid transparent;
+            box-shadow: 3px 3px #aae1d4;
+            border-radius: 5px;
+            width: 70px;
+            height: 70px;
+
+            &:active {
+                box-shadow: none;
+                transform: scale(0.9);
+            }
+        }
+        .hover:hover {
+            box-shadow: none;
+            background-color: #65ceb5;
+            transform: scale(1.1);
+            font-weight: bold;
+        }
+        .clicked-button {
+            background-color: #65ceb5;
+            box-shadow: inset 0px 0px 5px;
+            // border: 2px solid #378281;
+        }
+    }
+}
+.draw-area {
+    background-color: #9ED2C6;
+    border-radius: 40px;
+    padding: 5px 40px 40px 40px;
 }
 .container {
     display: grid;
-    width: 300px;
-    height: 300px;
-    margin: auto;
+    width: 400px;
+    height: 400px;
+
+    .cell {
+        background-color: #F7ECDE;
+        border: 1px solid rgba(220, 220, 220, 0.3);
+    }
 }
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    background-color: #F7ECDE;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    img {
+        width: 25px;
+        height: auto;
+
+        &:hover {
+            animation: spin 0.3s 1 ease-in-out;
+        }
+    }
+}
+
+@keyframes spin {
+    0% {transform: rotate(0);}
+    100% {transform: rotate(359deg);}
+}
+
+
+
+
+

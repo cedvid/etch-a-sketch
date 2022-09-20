@@ -1,5 +1,5 @@
 * {
-  border: 2px solid red;
+  font-family: "Quicksand", sans-serif;
 }
 
 html, body {
@@ -8,11 +8,122 @@ html, body {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  text-align: center;
+  background-color: #E9DAC1;
+}
+
+.main {
+  background-color: #F7ECDE;
+  border-radius: 40px;
+  box-shadow: 1px 1px #dabd96;
+  padding: 20px;
+  width: 90%;
+  height: 80%;
+  margin: 10px 40px 5px 40px;
+}
+
+h1 {
+  font-family: "Pacifico", cursive;
+  margin-top: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  gap: 5em;
+}
+.content .settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 15vw;
+}
+.content .grid-resize {
+  margin-bottom: 5px;
+}
+.content .grid-resize label {
+  display: block;
+}
+.content .buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5em;
+}
+.content .buttons button {
+  cursor: pointer;
+  background-color: #9ED2C6;
+  border: 2px solid transparent;
+  box-shadow: 3px 3px #aae1d4;
+  border-radius: 5px;
+  width: 70px;
+  height: 70px;
+}
+.content .buttons button:active {
+  box-shadow: none;
+  transform: scale(0.9);
+}
+.content .buttons .hover:hover {
+  box-shadow: none;
+  background-color: #65ceb5;
+  transform: scale(1.1);
+  font-weight: bold;
+}
+.content .buttons .clicked-button {
+  background-color: #65ceb5;
+  box-shadow: inset 0px 0px 5px;
+}
+
+.draw-area {
+  background-color: #9ED2C6;
+  border-radius: 40px;
+  padding: 5px 40px 40px 40px;
 }
 
 .container {
   display: grid;
-  width: 300px;
-  height: 300px;
-  margin: auto;
+  width: 400px;
+  height: 400px;
+}
+.container .cell {
+  background-color: #F7ECDE;
+  border: 1px solid rgba(220, 220, 220, 0.3);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  background-color: #F7ECDE;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+footer img {
+  width: 25px;
+  height: auto;
+}
+footer img:hover {
+  -webkit-animation: spin 0.3s 1 ease-in-out;
+          animation: spin 0.3s 1 ease-in-out;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
 }/*# sourceMappingURL=style.css.map */
