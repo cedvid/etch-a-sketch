@@ -106,8 +106,8 @@ footer img {
   height: auto;
 }
 footer img:hover {
-  -webkit-animation: spin 0.3s 1 ease-in-out;
-          animation: spin 0.3s 1 ease-in-out;
+  -webkit-animation: spin 0.7s 0.1s cubic-bezier(0.59, -0.56, 0.46, 1.61);
+          animation: spin 0.7s 0.1s cubic-bezier(0.59, -0.56, 0.46, 1.61);
 }
 
 @-webkit-keyframes spin {

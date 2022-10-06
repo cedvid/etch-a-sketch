@@ -115,7 +115,7 @@ footer {
         height: auto;
 
         &:hover {
-            animation: spin 0.3s 1 ease-in-out;
+            animation: spin 0.7s 0.1s cubic-bezier(0.59, -0.56, 0.46, 1.61);
         }
     }
 }
