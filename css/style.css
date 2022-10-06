@@ -54,24 +54,24 @@ h1 {
   cursor: pointer;
   background-color: #9ED2C6;
   border: 2px solid transparent;
-  box-shadow: 3px 3px #aae1d4;
+  box-shadow: 3px 3px #7aa097;
   border-radius: 5px;
   width: 70px;
   height: 70px;
 }
-.content .buttons button:active {
-  box-shadow: none;
-  transform: scale(0.9);
+.content .buttons .clicked-button {
+  background-color: #66a597;
+  box-shadow: inset 0px 0px 2px;
 }
-.content .buttons .hover:hover {
+.content .hover:hover {
   box-shadow: none;
-  background-color: #65ceb5;
+  background-color: #66a597;
   transform: scale(1.1);
   font-weight: bold;
 }
-.content .buttons .clicked-button {
-  background-color: #65ceb5;
-  box-shadow: inset 0px 0px 5px;
+.content .hover:hover:active {
+  box-shadow: inset 0px 0px 2px;
+  transform: scale(1);
 }
 
 .draw-area {
@@ -86,7 +86,7 @@ h1 {
   height: 400px;
 }
 .container .cell {
-  background-color: #F7ECDE;
+  background-color: rgb(247, 236, 222);
   border: 1px solid rgba(220, 220, 220, 0.3);
 }
 

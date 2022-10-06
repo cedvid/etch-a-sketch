@@ -6,14 +6,18 @@ const resetBtn = document.querySelector('#reset');
 const rainbowBtn = document.querySelector('#random-color');
 const modeBtn = document.querySelector('#change-mode');
 const eraser = document.querySelector('#eraser');
-const inkModeBtn = document.querySelector('#ink');
+const shadeModeBtn = document.querySelector('#shade-mode');
 
+let squares;
 let size = 16;
+let defaultOn = true;
 let rainbowOn = false;
-let inkModeOn = false;
+let shadeModeOn = false;
 let eraserOn = false;
 let currentMode = 'hoverMode';
-let color = 'black';
+let color;
+
+container.addEventListener('mousemove', e => e.preventDefault()); //prevents drag behavior
 
 newSize.addEventListener('input', changeSize);
 clearBtn.addEventListener('click', clearGrid);
@@ -21,40 +25,62 @@ resetBtn.addEventListener('click', resetGrid);
 modeBtn.addEventListener('click', changeMode);
 rainbowBtn.addEventListener('click', setRainbow);
 eraser.addEventListener('click', setEraser);
-inkModeBtn.addEventListener('click', setInkMode);
-container.addEventListener('contextmenu', ()=>{
-    rainbowOn = false;
-    rainbowBtn.classList.remove('clicked-button');
-    rainbowBtn.classList.add('hover');
-    eraser.classList.add('hover');
-    eraser.classList.remove('clicked-button');
-    generateColor();
-});
+container.addEventListener('contextmenu', changeColor);
+// shadeModeBtn.addEventListener('click', setShadeMode);
 
 let isMousedown = false;
 container.addEventListener('mousedown', ()=>{isMousedown = true;});
 container.addEventListener('mouseup', ()=>{isMousedown = false;});
 
-container.addEventListener('mouseover', function (e) {
-    if (currentMode == 'hoverMode') {
-        e.target.style.background = `${color}`;
+function generateDiv() {
+    container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+    for (let i = 0; i < size * size; i++) {
+        let cell = document.createElement('div');
+        cell.classList.add('cell');
+        container.appendChild(cell);
     }
-});
+    sizeValue.textContent = `${size} x ${size}`;
 
-container.addEventListener('mousemove', (e) => {
-        if (currentMode == 'clickMode' && isMousedown) {
-            e.target.style.backgroundColor = `${color}`;
-        }
-});
-container.addEventListener('mousemove', e => e.preventDefault()); //prevents drag behavior
+    squares = container.querySelectorAll('.cell');
+    squares.forEach((square) => {square.addEventListener('mouseover', colorCell)});
+}
 
-container.addEventListener('mousemove', () => {
-    if (rainbowOn) {generateColor();} 
-});
+function colorCell() {
+    // if (currentMode == 'clickMode' && isMousedown && shadeModeOn) {
+    //     paintBlack();
+    // } else if (currentMode == 'hoverMode' && shadeModeOn) {
+    //     paintBlack();
+    if (currentMode == 'hoverMode') {
+        checkColor();
+        this.style.backgroundColor = `${color}`;
+    } else if (currentMode == 'clickMode' && isMousedown) {
+        checkColor();
+        this.style.backgroundColor = `${color}`;
+    }
+}
 
-container.addEventListener('mousemove', ()=> {
-    if (inkModeOn) {setInkMode();}
-})
+function checkColor() {
+    if (rainbowOn) {
+        generateColor();
+    } else if (eraserOn) {
+        color = '#F7ECDE';
+    } else if (defaultOn) {
+        color = 'black';
+    }
+}
+
+function changeColor() {
+    rainbowOn = false;
+    defaultOn = false;
+    eraserOn = false;
+    rainbowBtn.classList.remove('clicked-button');
+    rainbowBtn.classList.add('hover');
+    eraser.classList.remove('clicked-button');
+    eraser.classList.add('hover');
+    generateColor();
+}
 
 function changeMode() {
     if (currentMode == 'hoverMode') {
@@ -75,7 +101,7 @@ function setRainbow() {
         rainbowOn = false;
         rainbowBtn.classList.remove('clicked-button');
         rainbowBtn.classList.add('hover');
-        color = 'black';
+        defaultOn = true;
     } else if (!rainbowOn) {
         rainbowOn = true;
         rainbowBtn.classList.add('clicked-button');
@@ -90,13 +116,6 @@ function generateColor() {
         randomColor += characters.charAt(Math.floor(Math.random() * characters.length));
         color = randomColor;
     }
-}
-
-//WORK IN PROGRESS
-function setInkMode() {
-    e.target.style.backgroundColor = 'black';
-    e.target.style.opacity = '(Number(e.target.style.opacity) + 0.1)';
-    console.log(e.target.style.opacity);
 }
 
 function setEraser() {
@@ -140,7 +159,7 @@ function resetGrid() {
     });
     size = 16;
     newSize.value = size;
-    color = 'black';
+    defaultOn = true;
     currentMode = 'hoverMode';
     modeBtn.textContent = 'Drawing Mode: Hover';
     rainbowOn = false;
@@ -151,16 +170,26 @@ function resetGrid() {
     generateDiv();
 }
 
-function generateDiv() {
-    container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-    container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
-
-    for (let i = 0; i < size * size; i++) {
-        let cell = document.createElement('div');
-        cell.classList.add('cell');
-        container.appendChild(cell);
-    }
-    sizeValue.textContent = `${size} x ${size}`;
-}
-
 generateDiv(size);
+
+// function setShadeMode() {
+//     eraserOn = false;
+//     rainbowOn = false;
+//     if (!shadeModeOn) {
+//         shadeModeOn = true;
+//     } else shadeModeOn = false;
+// }
+
+// function paintBlack() {
+//     container.addEventListener('mouseover', (e)=>{
+//         if (e.target.style.backgroundColor.match(/rgba/)) {
+//             let opacity = parseFloat(e.target.style.backgroundColor.slice(-4, -1));
+//             if (opacity <= 0.9) {
+//                 e.target.style.backgroundColor = `rgba(0, 0, 0, ${(opacity + 0.1).toFixed(2)})`;
+//             } else if (e.target.classList.contains('shade'));
+//             return;
+//         } else {
+//             e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+//         }
+//         });
+// }
